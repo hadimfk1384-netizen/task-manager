@@ -1,3 +1,3 @@
 <?php
-require_once __DIR__ . '/../config/Database.php';
-echo"Database connected successfully";
+require_once __DIR__ . '/../config/database.php';
+echo"Database connected successfully with PDO";
