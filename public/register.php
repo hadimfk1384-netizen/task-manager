@@ -20,7 +20,14 @@
         <input type="email" name="email" id="email" required >
 
     </div>
-<br>
+    <br>
+    <div>
+        <label for="password">Password:</label><br>
+        <input type="password" name="password" id="password" required>
+    </div>
+
+    <br>
+
     <button type="submit">Register</button>
 
 
