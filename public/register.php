@@ -1,4 +1,16 @@
 <?php
+session_start();
+$error =" ";
+$success =" ";
+
+if(isset($_SESSION['error'])){
+    $error =$_SESSION['error'];
+}
+if(isset($_SESSION['success'])){
+    $success = $_SESSION['success'];
+}
+unset($_SESSION['error']);
+unset($_SESSION['success']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +21,14 @@
 </head>
 <body>
 <h1>Register</h1>
+<?php
+ if($error !== ''):
+?>
+<p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
+<?php endif; ?>
+<?php if($success !== ''):?>
+    <p style="color: green;"><?php echo htmlspecialchars($success); ?></p>
+<?php endif; ?>
 <form action="../app/register-handler.php" method="post">
 <div>
     <label for="name">Name:</label><br>
@@ -32,5 +52,7 @@
 
 
 </form>
+    <a href="login.php">Already have an account? Login</a>
 </body>
+
 </html>
