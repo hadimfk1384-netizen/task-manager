@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
+require_once __DIR__ . '/../app/auth-check.php';
 
 $userName = $_SESSION['user_name'];
 ?>
