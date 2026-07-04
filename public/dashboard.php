@@ -8,6 +8,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userName = $_SESSION['user_name'];
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,9 @@ $userName = $_SESSION['user_name'];
 
 <p>Welcome, <?php echo htmlspecialchars($userName); ?>!</p>
 <p>You are logged in.</p>
+
+<br>
+<a href="../app/logout.php">Logout</a>
 
 </body>
 </html>
