@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../app/auth-check.php';
 
-$userName = $_SESSION['user_name']; 
+$userName = $_SESSION['user_name'];
 ?>
 
 <!DOCTYPE html>
