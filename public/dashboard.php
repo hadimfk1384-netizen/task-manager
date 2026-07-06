@@ -11,7 +11,7 @@ require_once "../config/database.php";
 $sql = "SELECT *
     FROM tasks 
     WHERE user_id = :user_id
-    ORDER BY created_at DESC";
+    ORDER BY created_at DESC    ";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
         'user_id' => $_SESSION['user_id']
@@ -61,6 +61,11 @@ $userName = $_SESSION['user_name'];
             <strong>Status:</strong>
             <?= htmlspecialchars($task['status']) ?>
 
+            <br><br>
+
+            <a href="edit-task.php?id=<?= $task['id'] ?>">
+                ✏️ Edit
+            </a>
         </div>
 
     <?php endforeach; ?>
