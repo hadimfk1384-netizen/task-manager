@@ -26,6 +26,11 @@ $stmt->execute([
     ':id' => $id,
     ':user_id' => $_SESSION['user_id']
 ]);
+require_once "helpers.php";
 
+setFlashMessage(
+    "success",
+    "Task updated successfully."
+);
 header("Location:../public/dashboard.php");
 exit;

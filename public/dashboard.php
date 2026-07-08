@@ -1,6 +1,7 @@
 <?php
 
 require_once "../app/auth-check.php";
+require_once "../app/helpers.php";
 require_once "../config/database.php";
 
 $sql = "SELECT *
@@ -15,7 +16,7 @@ $stmt->execute([
 ]);
 
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+$flash = getFlashMessage();
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +39,23 @@ $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </p>
 
 <hr>
+<?php if ($flash): ?>
 
+    <div
+            style="
+            background:#d4edda;
+            color:#155724;
+            padding:15px;
+            margin-bottom:20px;
+            border-radius:8px;
+        "
+    >
+
+        <?= htmlspecialchars($flash['message']) ?>
+
+    </div>
+
+<?php endif; ?>
 <h2>My Tasks</h2>
 
 <?php if (empty($tasks)): ?>

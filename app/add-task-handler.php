@@ -23,5 +23,11 @@ $stmt->execute([
     'title' => $title,
     'description' => $description
 ]);
+require_once "helpers.php";
+
+setFlashMessage(
+    "success",
+    "Task created successfully."
+);
 header("Location: ../public/dashboard.php");
 exit;

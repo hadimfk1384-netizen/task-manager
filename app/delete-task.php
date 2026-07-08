@@ -11,7 +11,12 @@ $stmt->execute([
     ':id' => $id,
     ':user_id' => $_SESSION['user_id']
 ]);
+require_once "helpers.php";
 
+setFlashMessage(
+    "success",
+    "Task deleted successfully."
+);
 header("Location:../public/dashboard.php");
 exit();
 
