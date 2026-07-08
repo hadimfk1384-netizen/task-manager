@@ -4,6 +4,9 @@ require_once "../app/auth-check.php";
 require_once "../app/helpers.php";
 require_once "../config/database.php";
 
+require_once "../templates/header.php";
+require_once "../templates/navbar.php";
+
 $sql = "SELECT *
         FROM tasks
         WHERE user_id = :user_id
@@ -21,23 +24,7 @@ $flash = getFlashMessage();
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Dashboard</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-
-</head>
-
-<body class="bg-light">
-
-<div class="container mt-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
 
@@ -162,10 +149,4 @@ $flash = getFlashMessage();
 
     <?php endif; ?>
 
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+<?php require_once "../templates/footer.php"; ?>
