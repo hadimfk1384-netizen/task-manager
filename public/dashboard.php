@@ -16,103 +16,156 @@ $stmt->execute([
 ]);
 
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $flash = getFlashMessage();
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-<body>
 
-<h1>Dashboard</h1>
+<body class="bg-light">
 
-<p>
-    Welcome <?= htmlspecialchars($_SESSION['user_name']) ?>
-</p>
+<div class="container mt-5">
 
-<p>
-    <a href="add-task.php">➕ Add Task</a>
-</p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<hr>
-<?php if ($flash): ?>
+        <div>
 
-    <div
-            style="
-            background:#d4edda;
-            color:#155724;
-            padding:15px;
-            margin-bottom:20px;
-            border-radius:8px;
-        "
-    >
+            <h2>Task Manager</h2>
 
-        <?= htmlspecialchars($flash['message']) ?>
-
-    </div>
-
-<?php endif; ?>
-<h2>My Tasks</h2>
-
-<?php if (empty($tasks)): ?>
-
-    <p>No tasks found.</p>
-
-<?php else: ?>
-
-    <?php foreach ($tasks as $task): ?>
-
-        <div style="border:1px solid #ccc; padding:15px; margin-bottom:15px;">
-
-            <h3><?= htmlspecialchars($task['title']) ?></h3>
-
-            <p><?= nl2br(htmlspecialchars($task['description'])) ?></p>
-
-            <p>
-                <strong>Status:</strong>
-
-                <?php if ($task['status'] === 'completed'): ?>
-
-                    <span style="color:green;">✅ Completed</span>
-
-                <?php else: ?>
-
-                    <span style="color:red;">⏳ Pending</span>
-
-                <?php endif; ?>
-
+            <p class="text-muted mb-0">
+                Welcome
+                <strong><?= htmlspecialchars($_SESSION['user_name']) ?></strong>
             </p>
 
-            <a href="edit-task.php?id=<?= $task['id'] ?>">
-                ✏️ Edit
+        </div>
+
+        <div>
+
+            <a href="add-task.php" class="btn btn-primary">
+                ➕ Add Task
             </a>
 
-            |
-
-            <a href="../app/delete-task.php?id=<?= $task['id'] ?>"
-               onclick="return confirm('Are you sure you want to delete this task?')">
-                🗑️ Delete
-            </a>
-
-            |
-
-            <a href="../app/toggle-task.php?id=<?= $task['id'] ?>">
-                <?= $task['status'] === 'pending'
-                        ? '✅ Mark as Completed'
-                        : '↩️ Mark as Pending' ?>
+            <a href="../app/logout.php" class="btn btn-danger">
+                Logout
             </a>
 
         </div>
 
-    <?php endforeach; ?>
+    </div>
 
-<?php endif; ?>
+    <?php if ($flash): ?>
+
+        <div class="alert alert-success">
+
+            <?= htmlspecialchars($flash['message']) ?>
+
+        </div>
+
+    <?php endif; ?>
+
+    <h3 class="mb-4">My Tasks</h3>
+
+    <?php if (empty($tasks)): ?>
+
+        <div class="alert alert-warning">
+
+            No tasks found.
+
+        </div>
+
+    <?php else: ?>
+
+        <?php foreach ($tasks as $task): ?>
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-body">
+
+                    <h4 class="card-title">
+
+                        <?= htmlspecialchars($task['title']) ?>
+
+                    </h4>
+
+                    <p class="card-text">
+
+                        <?= nl2br(htmlspecialchars($task['description'])) ?>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Status :</strong>
+
+                        <?php if ($task['status'] === 'completed'): ?>
+
+                            <span class="badge bg-success">
+                                Completed
+                            </span>
+
+                        <?php else: ?>
+
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+
+                        <?php endif; ?>
+
+                    </p>
+
+                    <div class="mt-3">
+
+                        <a href="edit-task.php?id=<?= $task['id'] ?>"
+                           class="btn btn-warning btn-sm">
+
+                            ✏️ Edit
+
+                        </a>
+
+                        <a href="../app/delete-task.php?id=<?= $task['id'] ?>"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this task?')">
+
+                            🗑 Delete
+
+                        </a>
+
+                        <a href="../app/toggle-task.php?id=<?= $task['id'] ?>"
+                           class="btn btn-secondary btn-sm">
+
+                            <?= $task['status'] === 'pending'
+                                    ? '✅ Mark as Completed'
+                                    : '↩️ Mark as Pending' ?>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <?php endforeach; ?>
+
+    <?php endif; ?>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

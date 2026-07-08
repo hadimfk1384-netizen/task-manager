@@ -1,5 +1,5 @@
 <?php
-require_once "../app/auth-check.php";
+$error = $_GET['error'] ?? "";
 unset($_SESSION['error']);
 ?>
 
