@@ -1,10 +1,5 @@
 <?php
-session_start();
-
-$error = '';
-if(isset($_SESSION['error'])){
-    $error = $_SESSION['error'];
-}
+require_once "../app/auth-check.php";
 unset($_SESSION['error']);
 ?>
 

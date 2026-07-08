@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "../app/auth-check.php";
 $error =" ";
 $success =" ";
 

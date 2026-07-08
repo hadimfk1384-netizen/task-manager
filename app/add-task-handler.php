@@ -1,11 +1,9 @@
 <?php
-session_start();
+require_once "auth-check.php";
 require_once "../config/database.php";
 
-if(!isset($_SESSION['user_id'])){
-    header("Location: ../public/login.php");
-    exit;
-}
+
+
 $title = trim($_POST['title']);
 $description = trim($_POST['description']);
 
